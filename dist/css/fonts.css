@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Thin.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-ExtraLight.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Light.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Regular.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Medium.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Bold.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-ExtraBold.otf"); }
+
+@font-face {
+  font-family: 'road-ua';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/road-ua/RoadUA-Black.otf"); }
+
+@font-face {
+  font-family: 'rock-star';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/rock-star/RockStar-Light.otf"); }
+
+@font-face {
+  font-family: 'rock-star';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/rock-star/RockStar-Regular.otf"); }
+
+@font-face {
+  font-family: 'rock-star';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/rock-star/RockStar-Bold.otf"); }
