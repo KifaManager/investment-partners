@@ -415,6 +415,14 @@
       margin-left: -42%; }
     .advantages video {
       height: 155px; }
+    .advantages .title-element.animate .text-left {
+      transform: translate(0%, 0px); }
+    .advantages .title-element.animate .text-right {
+      transform: translate(0%, 0px); }
+    .advantages .title-element .text-left {
+      transform: translate(-160%, 0px); }
+    .advantages .title-element .text-right {
+      transform: translate(160%, 0px); }
     .advantages .title-element p {
       width: 100%; }
     .advantages .left .title-2 {
@@ -675,9 +683,11 @@
       letter-spacing: -0.02em;
       margin-bottom: 6px; }
       .service .bottom a:after {
-        font-size: 10px; }
+        width: 8px;
+        height: 8px; }
   .page_service .consult {
-    margin: 55px 0 10px; }
+    margin: 55px 0 10px;
+    overflow: hidden; }
   .page_service .services .section-top {
     padding: 35px 0 15px; }
   .page_service .services-box > div {

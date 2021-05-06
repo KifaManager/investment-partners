@@ -13,7 +13,7 @@ const overflow = {
 };
 
 function initTeamSliders(){
-	new Swiper(".team-slider .swiper-container",{
+	var teamSlider = new Swiper(".team-slider .swiper-container",{
 		lazy:{
 			loadPrevNext:!0,
 			loadPrevNextAmount:5
@@ -22,6 +22,9 @@ function initTeamSliders(){
 		slidesPerView: 3,
 		spaceBetween:0,
 		speed:600,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        grabCursor : true,
 		pagination:{
 			el:".team-slider .swiper-pagination",
 			clickable:!0
@@ -37,17 +40,43 @@ function initTeamSliders(){
 			}
 		},
 		on:{
-            slideChangeTransitionStart:function(){
-                // alert('Change')
-            },
-			slideNextTransitionStart:function(){
-                // alert('Next')
-				767<$(window).innerWidth()
-			},
-			// sliderMove:function(){$(".team-slider .swiper-slide-active").addClass("border")},
-			// slideResetTransitionEnd:function(){$(".team-slider .swiper-slide-active").removeClass("border")}
 		}
 	})
+    // let swiperDelay = 500;
+    //
+    // // Add event to previous button
+    // $('.swiper-button-prev.enabled').click(function(){
+    //
+    //     // Disable swiper buttons so user doesnt click again
+    //     $(".swiper-button").removeClass("enabled");
+    //
+    //     // Set timeout for previous slide move
+    //     setTimeout(function(){
+    //         // Move to previous slide
+    //         teamSlider.slidePrev();
+    //         // Re-enable swiper buttons
+    //         $(".swiper-button").addClass("enabled");
+    //     }, swiperDelay);
+    // });
+    // // Add event to next button
+    // $('.swiper-button-next.enabled').click(function(){
+    //
+    //     // Disable swiper buttons so user doesnt click again
+    //     $(".swiper-button").removeClass("enabled");
+    //
+    //     // Set timeout for next slide move
+    //     setTimeout(function(){
+    //
+    //         // Move to next slide
+    //         teamSlider.slideNext();
+    //
+    //         // Re-enable swiper buttons
+    //         $(".swiper-button").addClass("enabled");
+    //
+    //     }, swiperDelay);
+    //
+    // });
+
 }
 
 function initFolderTeamSliders(){
@@ -96,67 +125,73 @@ function tooltipFormat(number, decimals, dec_point, thousands_sep) {
 
 function loader(){
 
-    let wrapper = document.getElementById('wrapper'),
-        loader = document.getElementById('loader'),
+    let loader = document.getElementById('loader'),
         loaderVideo = document.getElementById('loader-video');
 
-    loaderVideo.onended = (event) => {
-
-        loader.classList.add('opacity');
-
+    if($('body').find('.loader').length > 0){
+        loaderVideo.onended = (event) => {
+            loader.classList.add('opacity');
+            setTimeout(function () {
+                loader.classList.add('close');
+                folderAnimation();
+            }, 300);
+        };
+    } else {
         setTimeout(function () {
-
-            wrapper.classList.add('opacity');
-            loader.classList.add('close');
-            overflow.Default();
-
-            if($('#folder-video').length > 0){
-                let folderVideo = document.getElementById('folder-video');
-                folderVideo.play();
-
-                setTimeout(function(){
-                    $("video[data-poster]").each(function () {
-                        var e = $(this);
-                        e.attr("poster", e.attr("data-poster")).removeAttr("data-poster");
-                    })
-                }, 1000)
-
-
-            }
-
-            setTimeout(function(){
-                $('.header').addClass('animate');
-            }, 600);
-
-            setTimeout(function(){
-                $('.folder .circles .circle').each(function (index, element) {
-                    setTimeout(function(){
-                        element.classList.add('animate');
-                    }, 400 * index)
-                });
-            }, 1000);
-
-            setTimeout(function(){
-                $('.animation-element').each(function (index, element) {
-                    let $this = $(this);
-                    setTimeout(function(){
-                        element.classList.add('animate');
-                        if($this.hasClass('folder-counter')){
-                            let thisNumber = $this.find('.counter').attr('data-number')
-                            $this.find('.counter').rollNumber({
-                                number: thisNumber,
-                                speed: 500,
-                                fontStyle: {
-                                    'font-size': 50,
-                                }
-                            });
-                        }
-                    }, 400 * index)
-                });
-            }, 800);
-
+            folderAnimation();
         }, 300);
-    };
+    }
+
+}
+
+function folderAnimation() {
+
+    let wrapper = document.getElementById('wrapper');
+
+    wrapper.classList.add('opacity');
+    overflow.Default();
+
+    if($('#folder-video').length > 0){
+        let folderVideo = document.getElementById('folder-video');
+        folderVideo.play();
+        setTimeout(function(){
+            $("video[data-poster]").each(function () {
+                var e = $(this);
+                e.attr("poster", e.attr("data-poster")).removeAttr("data-poster");
+            })
+        }, 1000)
+    }
+
+    setTimeout(function(){
+        $('.header').addClass('animate');
+    }, 600);
+
+    setTimeout(function(){
+        $('.folder .circles .circle').each(function (index, element) {
+            setTimeout(function(){
+                element.classList.add('animate');
+            }, 400 * index)
+        });
+    }, 1000);
+
+    setTimeout(function(){
+        $('.animation-element').each(function (index, element) {
+            let $this = $(this);
+            setTimeout(function(){
+                element.classList.add('animate');
+                if($this.hasClass('folder-counter')){
+                    let thisNumber = $this.find('.counter').attr('data-number')
+                    $this.find('.counter').rollNumber({
+                        number: thisNumber,
+                        speed: 500,
+                        fontStyle: {
+                            'font-size': 50,
+                        }
+                    });
+                }
+            }, 400 * index)
+        });
+    }, 800);
 }
 
 function showElementsOnScroll(t) {
@@ -194,6 +229,10 @@ function showTitleOnScroll(t) {
             }, Time);
         }
     })
+}
+
+function sessionFunction(){
+    sessionStorage.setItem('loaded', true);
 }
 
 $(document).ready(function(){
@@ -381,6 +420,19 @@ $(window).on("load", function () {
 	setTimeout(function(){
         loader();
 	}, 10);
+
+    // Remove loader on other page except "divisions"
+    //---------------------//
+    if (!sessionStorage.getItem("loaded")) {
+        //	First time on the page
+    }else if(sessionStorage.getItem("loaded") && $('body').find('.page_divisions').length){
+        //	Page divisions
+    }else {
+        $('.loader').remove();
+        slidesCount = 0;
+    }
+    sessionFunction();
+    //---------------------//
 });
 // ------------------------ //
 
